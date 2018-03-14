@@ -1,0 +1,83 @@
+<br><br><br>
+<div class="view">
+<% if admin_signed_in? %>
+  <%=link_to("カテゴリー編集",categories_path)%>
+<% end %>
+
+    <% if params[:q].present? && params[:q][:item_name_cont].present? %>
+      <p>検索語句：　<%= params[:q][:item_name_or_label_name_or_item_name_cont] %></p>
+    <% end %>
+        <table class="item_index_box">
+        <% if @carts.where(user_id:current_user.id).presence == nil %>
+        </table>
+         <font color="gray"><h2>現在、カートには何も入っていません。</h2></font>
+
+        
+          <%= link_to items_path do %>
+        <div class="btn2">商品一覧へ</div>
+        <% end %>
+    <% else %>
+      <% @carts.each do |cart| %>
+          <!--画像画面左　登録がない場合noimageを表示-->
+          <td>
+          <div class="border"></div>
+            <% if current_user.id == cart.user_id %>
+            <div class="item-image">
+            <%= attachment_image_tag cart.item, :image, format: 'jpeg', fallback: "noimage_panda1.jpg",class:"item_image" %>
+    <% end %>
+          </td>
+          <!--商品内容-->
+          <td class="item_index_box_detail">
+          <p><h3><%= cart.item.item_name %></h3></p>
+
+          <p>カラー:<%= cart.item.color.color_name %></p>
+          <p>￥<%= number_to_currency(cart.item.price, :precision => 0) %>
+            <% if cart.item.stock == 0 %>
+            <span>( 売り切れ )</span>
+            <% elsif cart.item.stock <= 5 %>
+            <span>( 在庫 : 残りわずか )</span>
+            <% elsif cart.item.stock >= 5 && cart.item.stock <= 10 %>
+            <span>( 在庫 : △ )</span>
+            <% else %>
+            <span>( 在庫 : ○ )</span>
+            <% end %></p>
+                <% if cart.item.active != "display"%>
+                <p style="color:red">販売停止中商品です。</p>
+                <% end %>
+                    <%= form_for(cart, url: cart_path(cart.id), html: {method: 'PUT'}) do |f| %>
+                      <!--商品の個数を変更するフォーム-->
+                      <%= f.number_field :count ,min:0,max: cart.item.stock %>
+                      <%= f.hidden_field :user_id, :value => current_user.id %>
+                      <%= f.hidden_field :item_id, :value => cart.item.id %>
+                      <%= f.submit "個数を変更" %>
+                      <!--商品削除ボタン-->
+                      <button><%= link_to "　削除　", cart_path(cart.id), method: :delete %></button><br>
+                    <% end %>
+                    <div class="border"></div>
+                    <!-- １商品の合計金額 -->
+                    小計: ￥<%= number_to_currency(cart.item.price*cart.count,  precision:0) %><br>
+                  </div></div>
+                </td></tr></div>
+            </td></tr>
+      <% end %></table>
+      <div class="total-price-box">
+      <% if @total_price <= 2000 %>
+        <p>送料：￥<%= @fee %></p>
+        カート内合計金額：￥<%= @total_price+@fee %>
+        <% else %>
+        <p>送料：無料</p>
+        <div class="border2">
+        カート内合計金額：￥<%= number_to_currency(@total_price, precision:0) %><br>
+        <% end %></div><br><br>
+      <% if @carts.presence != nil %>
+          <%= link_to new_order_path do %>
+          <div class="square_btn1">レジへ進む</div>
+          <% end %>
+          <%= link_to items_path do %>
+        <div class="square_btn2">買い物を続ける</div>
+      <% end %>
+      <% end %>
+      <% end %>
+      <br>
+    </div>
+  </div>

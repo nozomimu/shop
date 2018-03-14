@@ -1,0 +1,147 @@
+// Place all the styles related to the AdminUsers controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+ul {
+  list-style:none;
+}
+
+.devise_errors {
+    padding-top: 20px;
+    color: #ff0000;
+    font-size: 14px;
+}
+
+.devise_errors ul {
+    list-style: none;
+    font-size: 14px;
+    color: #FF0000;
+}
+
+.devise_errors h2 {
+    font-size: 14px;
+}
+
+.form_notice {
+    font-size:14px;
+}
+
+.form_name {
+    font-weight: normal;
+    color: #555;
+}
+
+.form_style {
+    width: 300px;
+}
+.form_style2{
+  width: 119px;
+}
+
+.form_input {
+    border-radius: 4px;
+    margin-top: 15px;
+    height: 40px;
+    padding: 10px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+  }
+
+.form_word {
+    padding-left: 15px;
+    font-size: 12px;
+    color: #555;
+}
+
+.btn {
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #F08080;
+    font-size: 14px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 300px;
+    color: #fff;
+}
+.btn2 {
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #F08080;
+    font-size: 14px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-left: 20px;
+    width: 300px;
+    color: #fff;
+}
+
+.devise_link {
+    text-decoration: none;
+    text-align:center;
+    width: 100%;
+    padding: 20px 0 30px;
+}
+
+//==============================signup/edit==============================
+
+.form_base {
+    width: 600px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.form {
+    border-radius: 6px;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.link_space {
+    text-align: center;
+    height: 100px;
+    padding: 30px;
+}
+
+.form_password_changes {
+    margin: 15px;
+    padding-bottom: 20px;
+    background-color: #ffc0cb;
+    border: 2px solid #c3bbbb;
+}
+
+.form_style {
+    width: 360px;
+}
+.form_style_half {
+    width: 180px;
+}
+
+
+// ==============================signin==============================
+.form_base_signin {
+    width: 400px;
+    height: 500px;
+    text-align: center;
+    margin: 0 auto;
+}
+.link_space_signin {
+    height: 100px;
+    padding: 30px;
+}
+
+// ==============================password==============================
+.form_password {
+    height: auto;
+}
+
+.form_note {
+    font-size: 14px;
+    padding: 40px 0 10px;
+}
+
+.btn_password {
+    margin-bottom: 50px;
+}

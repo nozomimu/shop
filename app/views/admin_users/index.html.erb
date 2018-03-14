@@ -1,0 +1,32 @@
+<div class="view">
+<br>
+<h2 class="user-index-top">会員一覧</h2>
+<table class="cp_table">
+	<thead>
+		<tr>
+			<th>ID　　　　　</th>
+			<th>名前　　　　</th>
+			<th>住所　　　　</th>
+			<th>電話番号　</th>
+			<th>利用フラグ　</th>
+			<th>利用状況切り替え</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @users.each do |user| %>
+			<tr>
+				<td><%= user.id %></td>
+				<td><%= user.lastname %>　<%= user.firstname %></td>
+				<td><%= user.address %><br><%= user.address_more %></td>
+				<td><%= user.phone %>-<%= user.phone2 %>-<%= user.phone3 %></td>
+				<td><%= user.active_i18n %></td>
+				 <% if user.active{1} %>
+				 <td><%= link_to "利用停止", admin_user_path(user) ,method: :delete %></td>
+				 <% else %>
+				 <% end %>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+</div>
+

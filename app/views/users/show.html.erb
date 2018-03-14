@@ -1,0 +1,83 @@
+  <div class="view">
+   <%if flash%>
+   　<!-- ログイン時のメッセージ格納 -->
+      <% flash.each do |i,msg|%>
+       <div class="<%= "flash_#{i}"%> flash">
+         <%= msg %><br>
+       </div>
+      <% end %>
+   <% end %>
+   <br>
+   <br>
+
+<div class="user-box clearfix">
+    <div class="heading">My page</div><br>
+<!-- ユーザー情報の一覧 -->
+  <div class="user-text">
+    <span class="user_logo">ふりがな</span> 　<%= "#{@user.kana_lastname} #{@user.kana_firstname}" %><br>
+    <span class="user_logo">名前</span> 　<%= "#{@user.lastname} #{@user.firstname}" %><br>
+    <span class="user_logo">メールアドレス</span> 　<%= @user.email %><br>
+    <span class="user_logo">郵便番号</span> 　<%= @user.postal_code %><br>
+    <span class="user_logo">住所</span> 　<%= @user.address %><br>
+    <span class="user_logo">建物名</span> 　<%= @user.address_more %><br>
+    <span class="user_logo">電話番号</span> 　<%= @user.phone %>-<%= @user.phone2 %>-<%= @user.phone3 %><br><br>
+　　　<!-- プロフィール編集&削除ボタン -->
+    <%= link_to "退会する", users_destroy_path,method: :delete ,class: "square_btn2",data: { :confirm => "退会しますか？\n"}%>
+    <%= link_to "編集", edit_user_registration_path ,class: "square_btn1"%>
+ <br><br><br><br>
+
+
+<!-- 購入履歴情報 -->
+<div class="user-box">
+  <div class="order-text">
+    <% if @orders.presence == nil %>
+      <p>購入履歴はありません</p><br><br><br><br><br>
+    </div></div></div></div>
+    <% else %>
+    <h3>購入履歴</h3>
+    <% @orders_for_user.each do |order| %>
+        <ul>
+          <br>
+          <li>購入日:     <%= order.created_at.strftime('%Y年%-m月%d日 %p%l時%M分') %></li>
+          <li>
+            注文ID: <%= order.id %>
+          </li>
+          <li>お届け先氏名: <%= order.lastname %> <%= order.firstname %></li>
+          <li>発送先住所: <%= order.postal_code %> <%= order.address %><%= order.address_more %></li>
+          <li>発送先電話番号: <%= order.phone %>-<%= order.phone2 %>-<%= order.phone3 %>
+          <li>ステータス: <font color="green"><%= order.order_status_i18n %></font>
+          <li>注文合計:  ￥<%= total_per_order(order) %></li>
+          <li>
+            <% if total_per_order(order) >= 2000 %>
+              送料:<font color="red">無料</font>
+            <% else %>
+              送料:￥<%= @price %>
+              <% end %>
+            </li>
+        </ul></p>
+        <table class="cp_table">
+          <tr>
+            <th>画像</th>
+            <th>商品名</th>
+            <th>単価</th>
+            <th>注文数</th>
+            <th>小計</th>
+          </tr>
+                  <% order.details.each do |detail| %>
+                    <tr>
+                      <td><%= attachment_image_tag detail.item, :image, format: 'jpeg', fallback: "noimage_panda1.jpg",class:"order_image" %>
+                      </td>
+                      <td><%= detail.item.item_name %></td>
+                      <td>￥<%= detail.price %></td>
+                      <td><%= detail.count %></td>
+                      <td>￥<%= @total_price = detail.price * detail.count %></td>
+                  <% end %>
+                </table>
+                    <!-- 合計金額を出すためのテーブルの合計行 -->
+                    <tr class="history_address_line">
+
+                    </tr>
+                    <% end %>
+                    </div><div></div></li></li></ul></div>
+                    <% end %>
+                    </div></div></tr></table></div>

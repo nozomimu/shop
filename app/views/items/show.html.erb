@@ -1,0 +1,54 @@
+
+　<!--　商品画像  -->
+<div class="view">
+    <%= attachment_image_tag @item, :image, format: 'jpeg', class:"show_image" %>
+	<!--　商品情報　 -->
+	<div class="show_text">
+	<br><p class="title"><%= @item.item_name %></p>
+  <span class="tag"><%= @item.category.name %></span>
+       <span class="tag"><%= @item.color.color_name %></span><br><br>
+    	   <h2>
+          価格：　¥<%= number_to_currency(@item.price) %><br>
+        	<% if @item.stock == 0 %>
+            <span><font color="red">売り切れのため、購入できません。</font></span>
+            <% elsif @item.stock >= 5 && @item.stock < 20 %>
+              <span>( 在庫 : △ )</span>
+              <% else %>
+                <span>( 在庫 : ○ )</span>
+          <% end %>
+          <br>
+
+
+        　<% if user_signed_in? %>
+              <!-- 数量フォーム -->
+              <%= form_for @cart do |f| %>
+              数量:<%= f.number_field :count ,min:1,max:@item.stock, value:"1" %>
+              <%= f.hidden_field :item_id, :value => @item.id %></h2>
+            </h2>
+              <%= f.submit "カートに入れる" ,class:"square_btn1"%>
+          <% end %>
+          <% elsif admin_signed_in? %>
+              <span>残り<%= @item.stock %>個</span><br>
+              <%= link_to '変更', edit_item_path(@item), class:"square_btn2" %>
+
+           <% else %>
+              <font color="red">・購入するには<%= link_to"ログイン",new_user_session_path %>してください。<br></font>
+              　→会員登録は<%= link_to"こちら",new_user_registration_path %>
+           <% end %>
+        <br><br><br><br>
+        <!--テキスト-->
+        <%= @item.description %>
+         <p><h3>交換・返品ができます<br></h3>
+          Sweetiepetは、着た後でも商品到着から１週間以内であれば交換・返品が出来ます。<br>
+
+          <h3>交換について<br></h3>
+          ・返品商品を当社へ返送する際の梱包料、送料等はお客様のご負担をお願いしております。<br>           
+          ・新しくお渡しする商品の梱包料、送料は弊社が負担致します。<br>
+           
+          <h3>返品について<br></h3>
+          ・返品の際の梱包料/送料はお客様のご負担となりますので予めご了承ください。<br>
+          ・返金代金のお振込みにかかる手数料につきましては当社が負担いたします。<br>
+          ※試着後の破れ/汚れなどによる交換・返品はお受けしておりません。<br>
+          ※返品商品の当社への到着が確認でき次第、交換商品の発送、返金を行います。<br><br><br></p>
+        </div>
+      </div>

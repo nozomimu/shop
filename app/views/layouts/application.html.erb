@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sweetiepet</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+
+      </head>
+  <div class="container <%= "#{@add_class}"%>-image">
+   <header>
+    <div class="<%= "#{@add_class}"%>-header clearfix">
+      <div class="header-logo2">
+        <%= link_to 'Sweetie pet',items_path %>
+        <link href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet">
+      </div>
+
+      <div class="header-menu">
+        <ul>
+          <% if admin_signed_in? %><!--管理者がサインインした時-->
+            <li><p class="gara"><%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete %>　</p></li>
+            <li><p class="gara"><%= link_to '投稿フォーム', new_item_path %>　</p></li>
+            <li><p class="gara"><%= link_to '登録会員一覧',  admin_users_path %>　</p></li>
+            <li><p class="gara"><%= link_to 'オーダー履歴', in_order_path %>　</p></li>
+            <li><p class="gara"><%= link_to 'お問い合わせ', contacts_path %>　</p></li></ul>
+
+            <% elsif user_signed_in? %><!--ユーザーサインイン用-->
+              <li><p class="gara"><%= link_to 'My page',users_path %></p></li>
+            <%= link_to carts_path do %>
+              <li><p class="gara">Cart　</p></li>
+              <li><p class="gara"><%= link_to 'Contact', new_contact_path %>　</p></li>
+              <% end %>
+
+            <%= link_to destroy_user_session_path,method: :delete do %><li><p class="gara">Logout　</p></li>
+            <% end %>
+
+            <% else %>
+              <li><p class="gara"><%= link_to 'Sign in',new_user_session_path %>　</p></li>
+              <li><p class="gara"><%= link_to 'Sign up',new_user_registration_path%>　</p></li>
+              <li><p class="gara"><%= link_to 'Contact', new_contact_path %>　</p></li>
+                <div style="display: none">
+                  <li><%= link_to "管理者ログイン あとで消す", new_admin_session_path %> admin@admin.com(adminadmin)</li>
+                  <li><%= link_to "管理者ユーザー作成 あとで消す", new_admin_registration_path %></li>
+                </div>
+          <% end %>
+        </ul>
+   </header>
+ </div>
+   <div id="wrapper">
+   <body>
+  <div class="<%= "#{@add_class}"%>-image clearfix">
+   <div class="container_all">
+
+    <%= yield %>
+
+   </div></div></form>
+  <footer class="<%= "#{@add_class}-footer"%>">
+      © 2018 Sweetiepet
+  </footer>
+  </html></div>
+  </body></div></div></div>

@@ -1,0 +1,120 @@
+<div class="view">
+<%if flash%>
+   　<!-- ログイン時のメッセージ格納 -->
+      <% flash.each do |key,msg|%>
+       <div class="flash_<%= key%> flash">
+         <%= msg %><br>
+       </div>
+      <% end %>
+   <% end %>
+
+   		<div class="row">
+						<!-- 任意のID指定。クラスとデータ属性の指定。 -->
+						<div id="carousel-example" class="carousel slide " data-ride="carousel" data-interval="5000">
+						<!-- インジケーターの設置。下部の○●ボタン。 -->
+						<ol class="carousel-indicators">
+						<li data-target="#carousel-example" data-slide-to="0" class="active"></li>
+						<li data-target="#carousel-example" data-slide-to="1"></li>
+						<li data-target="#carousel-example" data-slide-to="2"></li>
+						</ol>
+
+							<!-- スライドの内容 -->
+							<div class="carousel-inner">
+									<div class="item active">
+										<%= image_tag "dax.jpg", :width=>'100%' %>
+									</div>
+									<div class="item">
+										<%= image_tag "dax2.jpg", :width=>'100%' %>
+									</div>
+									<div class="item">
+										<%= image_tag "poodle.jpg", :width=>'100%' %>
+									</div>
+							</div>
+
+							<!-- 左の移動ボタン -->
+							<a class="left carousel-control" href="#carousel-example" data-slide="prev">
+							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+							</a>
+							<!-- 右の移動ボタン -->
+							<a class="right carousel-control" href="#carousel-example" data-slide="next">
+							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+								</a>
+							</div>
+						</div>
+
+			<div class="header-search">
+		      <dl class="searchbox">
+		          <%= search_form_for @q,url: items_path do |f| %>
+		            <dt><%= f.text_field :item_name_cont,placeholder: '検索するテキストを入力' %></dt>
+		            <dd><%= f.submit "search" , class: 'search-btn'%></dd>
+		          <% end %>
+		      </dl>
+		    </div>
+		    <br>
+			<div class="heading">Products</div>
+			<% if admin_signed_in? %>
+				<%=link_to("カテゴリー編集",categories_path)%>
+			<% end %><br>
+
+			<% @items.each do |item| %>
+			    <div class="item-box">
+				<% if admin_signed_in? %>
+				<%=link_to("編集する","/items/#{item.id}/edit")%><br>
+			    <% end %>
+				<!--画像画面左　登録がない場合noimageを表示-->
+			    <%= link_to item_path(item.id) do %>
+			    
+			    <%= attachment_image_tag item, :image, :fill, 150, 150, format: 'jpeg', fallback: "noimage_panda1.jpg",class:"item_image" %>
+			<% end %>
+				<!--商品内容-->
+				<div class="item-text">
+			    <p><%= item.brand.brand_name %></p>
+				<p><h3><%= link_to "#{item.item_name}", item_path(item) %></h3></p>
+				<p class="tag"><%= item.category.name %></p> <p class="tag"><%= item.color.color_name %></p>
+				<p>¥<%= number_to_currency(item.price) %></p></div>
+					<% if item.stock == 0 %>
+                      <span><font color="red">売り切れ</font></span>
+	                        <% elsif item.stock >= 5 && item.stock < 20 %>
+	                        <span>( 在庫 : △ )</span>
+		                    <% else %>
+		                    <span>( 在庫 : ○ )</span>
+		                    <% end %></div>
+		           <% end %></div>
+
+
+    <div class="hide-box">
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <% if admin_signed_in? %>
+    <h1>　　　非表示アイテム一覧</h1>
+    		<% if params[:q].present? && params[:q][:artist_name_or_label_name_or_item_name_cont].present? %>
+		　　<div>
+		　　<p>検索語句：　<%= params[:q][:artist_name_or_label_name_or_item_name_cont] %></p>
+		　　</div>
+		　　<% end %>
+
+			<% @no_items.each do |item| %>
+			    <div class="item-box">
+				<% if admin_signed_in? %>
+				<%=link_to("編集する","/items/#{item.id}/edit")%><br>
+			    <% end %>
+			<!--画像画面左　登録がない場合noimageを表示-->
+			    <%= link_to item_path(item.id) do %>
+			    <%= attachment_image_tag item, :image, :fill, 150, 150, format: 'jpeg', fallback: "noimage_panda1.jpg",class:"item_image" %>
+			<% end %>
+					<!--商品内容-->
+				<div class="item-text">
+			    <p><%= item.brand.brand_name %></p>
+				<p><h3><%= link_to "#{item.item_name}", item_path(item) %></h3></p>
+				<p class="tag"><%= item.category.name %></p> <p class="tag">サイズ：<%= item.size.size_name %></p>
+				<p>¥<%= number_to_currency(item.price) %></p></div>
+					<% if item.stock == 0 %>
+                      <span><font color="red">売り切れ</font></span>
+	                    <% elsif item.stock >= 5 && item.stock < 20 %>
+	                     <span>( 在庫 : △ )</span>
+		                    <% else %>
+		                    <span>( 在庫 : ○ )</span>
+		                    <% end %></div>
+		                <% end %>
+		            <% end %>
+		        </div>
+

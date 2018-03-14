@@ -1,0 +1,72 @@
+// Place all the styles related to the Orders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.order_image{
+	width: 60px;
+	height: 60px;
+	margin: 0 auto;
+}
+
+.cp_table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.cp_table th {
+	width: 13%;
+	background: #f4f4f4;
+	padding: 10px;
+	border: 1px solid #dddddd;
+}
+.cp_table td {
+	text-align: left;
+	vertical-align: top;
+	padding: 10px;
+	border: 1px solid #dddddd;
+}
+.cp_table td:first-child {
+	text-align: left;
+	vertical-align: middle;
+	font-weight: bold;
+}
+@media only screen and (max-width: 480px) {
+	.cp_table {
+		display: block;
+		width: 100%;
+	}
+	.cp_table thead {
+		display: block;
+		float: left;
+		overflow-x: scroll;
+	}
+	.cp_table tbody {
+		display: block;
+		width: auto;
+		overflow-x: auto;
+		white-space: nowrap;
+	}
+	.cp_table th {
+		display: block;
+		width: auto;
+		border-width: 1px 0px 0px 1px;
+		border-color: #dddddd;
+		border-style: solid;
+	}
+	.cp_table th:last-child {
+		border-bottom: 1px solid #dddddd;
+	}
+	.cp_table tbody tr {
+		display: inline-block;
+		margin: 0;
+	}
+	.cp_table td {
+		display: block;
+		border-width: 1px 1px 0px 1px;
+		border-color: #dddddd;
+		border-style: solid;
+	}
+	.cp_table td:last-child {
+		border-bottom: 1px solid #dddddd;
+	}
+}

@@ -1,0 +1,74 @@
+
+   <%if flash%>
+   　<!-- ログイン時のメッセージ格納 -->
+      <% flash.each do |i,msg|%>
+       <div class="<%= "flash_#{i}"%> flash">
+         <%= msg %><br>
+       </div>
+      <% end %>
+   <% end %>
+<br>
+<br>
+<div class="user-box clearfix">
+    <% if @orders.presence == nil %>
+      <div class="order-text">
+      <h2>購入履歴はありません</h2>
+    </div>
+    <% else %>
+  <div class="heading">　　　注文情報一覧</div><br>
+  <% @orders.each do |order| %>
+    <div class="memopad">
+<!-- 注文したユーザー -->
+
+  <div class="user-text">
+    <span class="user_logo">ふりがな</span> 　<%= "#{order.user.kana_lastname} #{order.user.kana_firstname}" %><br>
+    <span class="user_logo">名前</span> 　<%= "#{order.user.lastname} #{order.firstname}" %><br>
+    <span class="user_logo">郵便番号</span> 　<%= order.postal_code %><br>
+    <span class="user_logo">住所</span> 　<%= order.address %><br>
+    <span class="user_logo">建物名</span> 　<%= order.address_more %><br>
+    <span class="user_logo">電話番号</span> 　<%= order.phone %>-<%= order.phone2 %>-<%= order.phone3 %><br><br>
+  </div>
+
+
+<!-- 購入履歴情報 -->
+    <div class="order-text">
+    <h3>お届け先情報</h3>
+        <ul>
+          <li>購入日:     <%= order.created_at.strftime('%Y年%-m月%d日 %p%l時%M分') %></li>
+          <li>
+            注文ID: <%= order.id %>
+          </li>
+          <li>お届け先氏名: <%= order.lastname %> <%= order.firstname %></li>
+          <li>発送先住所: <%= order.postal_code %> <%= order.address %><%= order.address_more %></li>
+          <li>発送先電話番号: <%= order.phone %>-<%= order.phone2 %>-<%= order.phone3 %></li>
+        　<li>ステータス:　<font color="green"><%= order.order_status_i18n %>
+                  <%= form_for(order) do |f| %>
+                    <%= f.select :order_status, Order.order_statuses_i18n.keys.map { |k| [Order.order_statuses_i18n[k], k]} %>
+                    <%= f.submit "変更する",color:"red" %>
+                    </li>
+                  <% end %>
+        </font></li></ul>
+        <table class="cp_table">
+          <tr>
+            <th>画像</th>
+            <th>商品ID</th>
+            <th>商品名</th>
+            <th>単価</th>
+            <th>注文数</th>
+            <th>小計</th>
+          </tr>
+          <% order.details.each do |detail| %>
+            <tr>
+              <td><%= attachment_image_tag detail.item, :image, format: 'jpeg', fallback: "noimage_panda1.jpg",class:"order_image" %></td>
+              <td><%= detail.item.id %></td>
+              <td><%= detail.item.item_name %></td>
+              <td><%= detail.price %>円</td>
+              <td><%= detail.count %></td>
+              <td><%= detail.price * detail.count %>円</td>
+            </tr>
+    <% end %>
+  </table>
+  </div></div>
+  <% end %>
+  <% end %>
+  </div>

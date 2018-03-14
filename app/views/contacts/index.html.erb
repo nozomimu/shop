@@ -1,0 +1,19 @@
+<section>
+	<% if flash[:n] %>
+		<div class="flash-message"><%= flash[:n] %></div><br><br>
+	<% end %>
+
+	<h1 class="text-center">お問い合わせ一覧</h1>
+
+	<% @contacts.each do |c| %>
+		<div class="memopad2">
+			<p>名前　　　　　:<%= c.name %>　</p>
+			<p>カナ　　　　　:<%= c.kana_name %></p>
+			<p>メールアドレス:<%= c.email %></p>
+			<p>電話番号　　　:<%= c.phone %></p>
+			<p>お問い合わせ内容</p>
+			<p><%= c.message %></p><br><br>
+			<%= link_to "削除", contacts_path(c.id), method: :delete, "data-confirm" => "削除します。よろしいですか？" %>
+		</div>
+	<%end%>
+<section>
