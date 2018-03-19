@@ -1,37 +1,42 @@
 	<br>
 	<br>
 	<br>
+	<div class="view">
 
-	<h2 class="text_center">＜お届け先情報＞
+	<h2 class="gara">お届け先情報を入力してください。
+	<br>
+	<br>
 	<%= form_for @order do |f| %>
-			<div class="text_center">お名前</div>
-		<div class="text_center">
+			<div class="gara">お名前<font color="red">(必須)</font></div>
+		<div class="gara">
 			姓：<%= f.text_field :lastname, value: "#{current_user.lastname}" %>
 			　名：<%= f.text_field :firstname, value: "#{current_user.firstname}", class: "delivery-text" %>
 		</div><br>
 
-		<div class="text_center">お名前（全角カナ）</div>
-		<div class="text_center">
+		<div class="gara">お名前（全角カナ）<font color="red">(必須)</font></div>
+		<div class="gara">
 			セイ：<%= f.text_field :kana_lastname, value: "#{current_user.kana_lastname}",class: "delivery-text" %>
 			メイ：<%= f.text_field :kana_firstname, value: "#{current_user.kana_firstname}",class: "delivery-text" %>
 
 		</div><br>
-		<div class="text_center">郵便番号</div>
-		<div class="text_center">
+		<div class="gara">郵便番号<font color="red">(必須)</font></div>
+		<div class="gara">
 			<%= f.text_field :postal_code, value: "#{current_user.postal_code}", class: "delivery-text" %>
 		</div><br>
-		<div class="text_center">住所</div>
-		<div class="text_center"><%= f.text_field :address, value: "#{current_user.address}", class: "delivery-text" %>
+		<div class="gara">住所<font color="red">(必須)</font></div>
+		<div class="gara"><%= f.text_field :address, value: "#{current_user.address}", class: "delivery-text" %>
 		</div><br>
-		<div class="text_center">建物名、マンション名,号室</div>
-		<div class="text_center">
+		<div class="gara">建物名・マンション名・号室</div>
+		<div class="gara">
 			<%= f.text_field :address_more, value: "#{current_user.address_more}", class: "delivery-text" %>
 		</div><br>
-		<div class="text_center">電話番号</div>
-		<div class="text_center">
+		<div class="gara">電話番号<font color="red">(必須)</font></div>
+		<div class="gara">
 			<%= f.text_field :phone, value: "#{current_user.phone}" %>-<%= f.text_field :phone2, value: "#{current_user.phone2}" %>-<%= f.text_field :phone3, value: "#{current_user.phone3}" %>
 		</div><br><br><br>
 			<%= f.submit "購入",class: "btn" %>
 		</div><br><br>
 	</h1>
 	<% end %>
+</h2>
+</div>

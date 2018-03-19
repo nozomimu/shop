@@ -1,14 +1,55 @@
 
 　<!--　商品画像  -->
 <div class="view">
+  <br>
+  <br>
+
+  <% if image2_id =! nil  %>
+            <!-- 任意のID指定。クラスとデータ属性の指定。 -->
+
+
+                  <%= attachment_image_tag @item, :image, format: 'jpeg', class:"show_image" %>
+
+              <!-- スライドの内容 -->
+                <div class="slider">
+                  <% if image2_id =! nil  %>
+                    <div><%= attachment_image_tag @item, :image2, format: 'jpeg', class:"show_image" %></div>
+
+                  <% elsif image3_id =! nil %>
+                    <div><%= attachment_image_tag @item, :image3, format: 'jpeg', class:"show_image" %></div>
+
+                  <% elsif image4_id =! nil %>
+                    <div><%= attachment_image_tag @item, :image4, format: 'jpeg', class:"show_image" %></div>
+
+                  <% elsif image5_id =! nil %>
+                    <div><%= attachment_image_tag @item, :image5, format: 'jpeg', class:"show_image" %></div>
+                </div>
+                $('.slider').slick();
+
+
+    <% else %>
     <%= attachment_image_tag @item, :image, format: 'jpeg', class:"show_image" %>
+    <% end %>
+    <% end %>
+</div>
+
 	<!--　商品情報　 -->
 	<div class="show_text">
 	<br><p class="title"><%= @item.item_name %></p>
-  <span class="tag"><%= @item.category.name %></span>
-       <span class="tag"><%= @item.color.color_name %></span><br><br>
+    <span class="tag">
+          <%= link_to category_path(@item.category.id) do %>
+          <%= @item.category.name %>
+          <% end %>
+    </span>
+    <span class="tag">
+          <%= link_to size_path(@item.size.id) do %>
+          サイズ:<%= @item.size.size_name %>
+          <% end %>
+    </span>
+    <br>
+    <br>
     	   <h2>
-          価格：　¥<%= number_to_currency(@item.price) %><br>
+          価格：　<%= number_to_currency(@item.price) %><br>
         	<% if @item.stock == 0 %>
             <span><font color="red">売り切れのため、購入できません。</font></span>
             <% elsif @item.stock >= 5 && @item.stock < 20 %>
@@ -16,7 +57,6 @@
               <% else %>
                 <span>( 在庫 : ○ )</span>
           <% end %>
-          <br>
 
 
         　<% if user_signed_in? %>
@@ -32,10 +72,38 @@
               <%= link_to '変更', edit_item_path(@item), class:"square_btn2" %>
 
            <% else %>
-              <font color="red">・購入するには<%= link_to"ログイン",new_user_session_path %>してください。<br></font>
+           <br>
+           </h2>
+              <font color="red">購入するには<%= link_to"ログイン",new_user_session_path %>してください。<br></font>
               　→会員登録は<%= link_to"こちら",new_user_registration_path %>
            <% end %>
+
+
+
+          <div id="share">
+          <ul>
+            <!-- Facebook -->
+          <div id="fb-root"></div>
+          <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/ja_KS/sdk.js#xfbml=1&version=v2.12';
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));</script>
+          <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">シェア</a></div>
+          <!-- Twitter -->
+          <li class="share-twitter">
+            <a href="http://twitter.com/home?status=<?php echo urlencode(the_title_attribute('echo=0')); ?>%20<?php the_permalink(); ?>%20by%20" target="_blank">Twitter</a>
+          </li>
+          </ul>
         <br><br><br><br>
+        <html>
+
+
+
+
+
         <!--テキスト-->
         <%= @item.description %>
          <p><h3>交換・返品ができます<br></h3>
@@ -51,4 +119,5 @@
           ※試着後の破れ/汚れなどによる交換・返品はお受けしておりません。<br>
           ※返品商品の当社への到着が確認でき次第、交換商品の発送、返金を行います。<br><br><br></p>
         </div>
-      </div>
+
+

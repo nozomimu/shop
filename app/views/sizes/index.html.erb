@@ -1,0 +1,23 @@
+<h1>サイズ</h1>
+<!-- form_for部分 -->
+<%= form_for @size do |f| %>
+    <h2>サイズ追加</h2>
+    <%= f.text_field :size_name %>
+    <%= f.submit '投稿' %>
+<% end %>
+
+<h2>カラー一覧</h2>
+<% @sizes.each do |s| %>
+ <%= s.size_name %>
+ <%= link_to "edit", edit_size_path(s) %>
+
+  <% if s.items.presence != nil %>
+    利用アイテムあり。削除不可 <br>
+    <% else %>
+   <%= link_to "destroy", size_path(s), method: :delete %><br>
+   <% end %>
+
+<% end %>
+
+<br>
+<%= link_to "一覧へ戻る", items_path %>　｜　<%= link_to '投稿フォームへ戻る', new_item_path %>

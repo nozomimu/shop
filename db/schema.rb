@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314061402) do
+ActiveRecord::Schema.define(version: 20180319075020) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -117,6 +117,12 @@ ActiveRecord::Schema.define(version: 20180314061402) do
     t.string "phone2"
     t.string "phone3"
     t.integer "order_status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sizes", force: :cascade do |t|
+    t.string "size_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

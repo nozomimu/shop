@@ -9,6 +9,7 @@ class CartsController < ApplicationController
 	         @total_price += cart.item.price*cart.count
 	      end
     	end
+    	@random = Item.order("RANDOM()").first
 	end
 
 	def create

@@ -16,8 +16,8 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
-
+@import 'slick';
+@import 'slick-theme';
 
 *{
   margin: 0px;
@@ -43,7 +43,7 @@ body,
 .container_all {
   width: 100%;
   margin: 0 auto;
-  padding:0 20px;
+  padding:12px 20px;
 }
 
 .applicaion-users-header {
@@ -54,14 +54,14 @@ body,
 }
 .gara{
   font-family: 'EB Garamond', serif;
-  font-size: 30px;
+  font-brand: 24px;
 }
 .applicaion-users-footer {
   background-color: #F08080;
   text-align: center;
   color: #fff;
   height: 40px;
-  font-size: 10px;
+  font-brand: 10px;
   line-height: 30px;
   width: 100%;
   margin-top: auto;
@@ -69,19 +69,23 @@ body,
 }
 .header-logo {
   float: left;
-  font-size: 60px;
+  font-brand: 60px;
   font-family: 'Nothing You Could Do', cursive;
   margin: 0 30px;
 }
 .header-logo2 {
   padding-top: 20px;
-
-  font-size: 60px;
+  font-brand: 60px;
   font-family: 'Nothing You Could Do', cursive;
   margin: 0 30px;
+  float:left;
 }
 .applicaion-users-header a {
     color: #fff;
+    text-decoration: none;
+  }
+.applicaion-users-header a:hover {
+    color: #000080;
     text-decoration: none;
   }
 
@@ -96,6 +100,31 @@ header ul{
 header li{
   display: inline;
   float: right;
+}
+
+.header-menu li{
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  padding-top: 40px;
+}
+.header-menu li::after {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: #000080;
+  opacity: 0;
+  visibility: hidden;
+  transition: .3s;
+}
+.header-menu li:hover::after {
+  bottom: -4px;
+  opacity: 1;
+  color: #000080;
+  visibility: visible;
 }
 .view{
   width: 80%;
@@ -113,7 +142,7 @@ header li{
   top: 12px;
 }
 .heading{
-  font-size: 30px;
+  font-brand: 40px;
   font-family: 'Nothing You Could Do', cursive;
 }
 
@@ -127,7 +156,7 @@ header li{
   text-align: center;
   color: #fff;
   height: 40px;
-  font-size: 10px;
+  font-brand: 10px;
   line-height: 30px;
   width: 100%;
   margin-top: auto;
@@ -163,7 +192,7 @@ dl.searchbox dt input{
   height:36px;
   line-height:30px;
   background:none;
-  padding-left: 115px
+  padding-left: 80px
 }
 dl.searchbox dd{
   position:absolute;
@@ -208,4 +237,5 @@ dl.searchbox dd{
  box-shadow: 5px 5px 5px #999;
  border-radius: 15px;/*角の丸み*/
 }
+
 

@@ -18,10 +18,11 @@ class ItemsController < ApplicationController
 
   def create
   	@item = Item.new(item_params)
-    #Rails.logger.info(@item)
-    @item.save
-    # Rails.logger.info(@item)
-    redirect_to ("/items")
+    if @item.save
+       redirect_to items_path
+    else
+      render :new
+    end
   end
 
   def show
@@ -40,7 +41,7 @@ class ItemsController < ApplicationController
       redirect_to ("/items")
     else
       #updateを失敗すると編集ページへ
-      render ("items/edit")
+      render :edit
     end
 
   end
@@ -65,6 +66,7 @@ class ItemsController < ApplicationController
               :item_season,
               :stock,
               :color_id,
+              :size_id,
               :category_id,
               :brand_id,
               :color_name,

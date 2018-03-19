@@ -31,7 +31,8 @@
         ブランド　　　　<%= f.collection_select :brand_id, Brand.all, :id, :brand_name %><%=link_to("編集",brands_path)%><br>
       </div>
        <div class="col-sm-8">
-        カラー・サイズ　<%= f.collection_select :color_id, Color.all, :id, :color_name %><%=link_to("編集",colors_path)%><br>
+        カラー　<%= f.collection_select :color_id, Color.all, :id, :color_name %><%=link_to("編集",colors_path)%><br>
+        サイズ　<%= f.collection_select :size_id, Size.all, :id, :size_name %><%=link_to("編集",sizes_path)%><br>
       </div>
        <div class="col-sm-8">
         カテゴリー　　　<%= f.collection_select :category_id, Category.all, :id, :name %><%=link_to("編集",categories_path)%>

@@ -31,6 +31,18 @@ class BrandsController < ApplicationController
     redirect_to (brands_path)
   end
 
+   def show
+    @items = if params[:search]
+      Item.all.where("yomi_name LIKE?","%#{params[:search]}%")
+      else
+      Item.all
+    end
+    @sizes = Size.all
+    @categories = Category.all
+    @brand = Brand.find(params[:id])
+    @brands = Brand.all
+  end
+
 private
 	def brand_params
 	  params.require(:brand).permit(:brand_name)
