@@ -6,7 +6,7 @@
     <%= f.submit '投稿' %>
 <% end %>
 
-<h2>カラー一覧</h2>
+<h2>サイズ一覧</h2>
 <% @colors.each do |c| %>
  <%= c.color_name %>
  <%= link_to "edit", edit_color_path(c) %>

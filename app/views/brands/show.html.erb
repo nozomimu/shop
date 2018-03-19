@@ -1,0 +1,82 @@
+<section>
+	<!--カテゴリで絞った画面-->
+	<div class="view">
+		<br>
+		<br>
+		<div class="col-lg-9">
+           <div class="header-search">
+		      <dl class="searchbox">
+		          <%= search_form_for @q,url: items_path do |f| %>
+		            <dt><%= f.text_field :item_name_cont,placeholder: '商品名で検索' %></dt>
+		            <dd><%= f.submit "search" , class: 'search-btn'%></dd>
+		          <% end %>
+		      </dl>
+		   </div>
+		    <br>
+			<h3 class="bold text-center">ブランド:<%= @brand.brand_name %> 一覧　<font color="red",font brand="4">2000円以上購入で送料無料！</font></h3><br><br>
+
+			<% if @brand.items.presence == nil %>
+				現在掲載されている商品はありません
+			<% end %>
+
+			<% @items.each do |item| %>
+			<% if @brand.id == item.brand_id %>
+			    <div class="item-box">
+				<!--画像画面左　登録がない場合noimageを表示-->
+			    <%= link_to item_path(item.id) do %>
+			    <%= attachment_image_tag item, :image, :fill, 150, 150, format: 'jpeg', fallback: "noimage_panda1.jpg",class:"item_image" %>
+			    <% end %>
+				<!--商品内容-->
+				<div class="item-text">
+			    <h4><%= item.brand.brand_name %>
+				<h3><%= link_to "#{item.item_name}", item_path(item) %></h3>
+				<p class="tag"><%= item.category.name %></p> <p class="tag">サイズ:<%= item.size.size_name %> </p><br>
+				<%= number_to_currency(item.price) %></div>
+					<% if item.stock == 0 %>
+                      <span><font color="red">売り切れ</font></span>
+	                        <% elsif item.stock >= 5 && item.stock < 20 %>
+	                        <span>( 在庫 : △ )</span>
+		                    <% else %>
+		                    <span>( 在庫 : ○ )</span>
+		                    <% end %>
+		                </div>
+		           	<% end %>
+		           </h4>
+		           <% end %>
+		       </div>
+
+			<div class="col-lg-2">
+				<p class="heading">Category</p>
+				<% @categories.each do |c| %>
+					<ul>
+						<li class="tag"><%= link_to category_path(c.id) do %><%= c.name %><% end %></li><br>
+					</ul>
+				<% end %>
+				<br>
+				<p class="heading">Size</p>
+				<% @sizes.each do |s| %>
+					<ul>
+						<li class="tag"><%= link_to size_path(s.id) do %><%= s.size_name %><% end %></li><br>
+					</ul>
+				<% end %>
+				<br>
+				<p class="heading">Brand</p>
+				<% @brands.each do |b| %>
+					<ul>
+						<li class="tag"><%= link_to brand_path(b.id) do %><%= b.brand_name %><% end %></li><br>
+					</ul>
+				<% end %>
+				<br>
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+
+
+
+
+
+
+
+

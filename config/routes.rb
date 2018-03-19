@@ -26,9 +26,9 @@ devise_for :admins, controllers: {
   resources :carts
   resources :admin_users, only:[:index,:show,:destroy,:update]
   resources :orders, only: [:create,:new,:index,:update]
-  resources :categories,only: [:new, :create, :index, :update, :edit, :destroy]
-  resources :brands,only: [:new, :create, :index, :update, :edit, :destroy]
-  resources :sizes,only: [:new, :create, :index, :update, :edit, :destroy]
+  resources :categories,only: [:new, :create, :index, :update, :edit, :destroy,:show]
+  resources :brands,only: [:new, :create, :index, :update, :edit, :destroy,:show]
+  resources :sizes,only: [:new, :create, :index, :update, :edit, :destroy,:show]
   resources :colors,only: [:new, :create, :index, :update, :edit, :destroy]
   resources :contacts, only: [:index, :new, :create, :destroy]
 

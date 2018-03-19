@@ -69,4 +69,5 @@ group :development, :test do
   gem 'bootstrap-sass'
   gem 'jquery-rails'
   gem 'cocoon'
+  gem 'jquery-slick-rails'
 end

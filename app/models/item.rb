@@ -10,6 +10,7 @@ class Item < ApplicationRecord
 	belongs_to :category
 	belongs_to :brand
 	belongs_to :color
+	belongs_to :size
 
 
 	enum active: { display: 0, hide: 1}
