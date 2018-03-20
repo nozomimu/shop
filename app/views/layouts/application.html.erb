@@ -9,13 +9,12 @@
     <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
 
       </head>
-  <div class="container <%= "#{@add_class}"%>-image">
+  <div class="<%= "#{@add_class}"%>-image">
    <header>
-    <div class="<%= "#{@add_class}"%>-header clearfix">
+    <div class="<%= "#{@add_class}"%>-header">
       <div class="header-logo2">
-        <%= link_to 'Sweetie pet',items_path %>
+        <%= link_to 'Sweetie pet',items_path %><div  class="gara">小型犬用ウェアの通販サイト</div>
         <link href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet">
-        <div  class="gara">小型犬用ウェアの通販サイト</div>
       </div>
 
       <div class="header-menu">
@@ -40,8 +39,6 @@
             <% else %>
               <li><p class="gara">　<%= link_to 'Sign in',new_user_session_path %>　</p></li>
               <li><p class="gara">　<%= link_to 'Sign up',new_user_registration_path%>　</p></li>
-              <li><p class="gara">　<%= link_to 'Contact', new_contact_path %>　</p></li>
-              
               <li><p class="gara">　<%= link_to 'Contact', new_contact_path %>　</p></li>
                 <div style="display: none">
                   <li><%= link_to "管理者ログイン あとで消す", new_admin_session_path %> admin@admin.com(adminadmin)</li>

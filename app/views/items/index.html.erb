@@ -2,9 +2,13 @@
 <%if flash%>
    　<!-- ログイン時のメッセージ格納 -->
       <% flash.each do |key,msg|%>
+      	<br>
+      	<br>
        <div class="flash_<%= key%> flash">
-         <%= msg %><br>
+         <%= msg %>
        </div>
+         <br>
+         <br>
       <% end %>
    <% end %>
 
@@ -51,44 +55,71 @@
 		      </dl>
 		    </div>
 		    <br>
+
 		    <!--商品一覧表示-->
-			<div class="heading">Products　<font color="red",font size="4">2000円以上購入で送料無料！</font></div>
+			<div class="heading">Products　<font color="red",font size="5">2000円以上購入で送料無料！</font></div>
+			<div class="col-lg-2">
+				<p class="heading">Category</p>
+				<% @categories.each do |c| %>
+					<ul>
+						<li class="tag"><%= link_to category_path(c.id) do %><%= c.name %><% end %></li><br>
+					</ul>
+				<% end %>
+				<br>
+				<p class="heading">Size</p>
+				<% @sizes.each do |s| %>
+					<ul>
+						<li class="tag"><%= link_to size_path(s.id) do %><%= s.size_name %><% end %></li><br>
+					</ul>
+				<% end %>
+				<br>
+				<p class="heading">Brand</p>
+				<% @brands.each do |b| %>
+					<ul>
+						<li class="tag"><%= link_to brand_path(b.id) do %><%= b.brand_name %><% end %></li><br>
+					</ul>
+				<% end %>
+				<br>
+			</div>
+
+
 			<% if admin_signed_in? %>
 				<%=link_to("カテゴリー編集",categories_path)%>
 			<% end %><br>
 
-			<% @items.each do |item| %>
-			    <div class="item-box">
-				<% if admin_signed_in? %>
-				<%=link_to("編集する","/items/#{item.id}/edit")%><br>
-			    <% end %>
-				<!--画像画面左　登録がない場合noimageを表示-->
-			    <%= link_to item_path(item.id) do %>
-			    <%= attachment_image_tag item, :image, :fill, 150, 150, format: 'jpeg', fallback: "noimage_panda1.jpg",class:"item_image" %>
-			<% end %>
-				<!--商品内容-->
-				<div class="item-text">
-			    <h4><%= item.brand.brand_name %>
-				<h3><%= link_to "#{item.item_name}", item_path(item) %></h3>
-				<p class="tag"><%= item.category.name %></p> <p class="tag">サイズ:<%= item.size.size_name %> </p><br>
-				<%= number_to_currency(item.price) %></div>
-					<% if item.stock == 0 %>
-                      <span><font color="red">売り切れ</font></span>
-	                        <% elsif item.stock >= 5 && item.stock < 20 %>
-	                        <span>( 在庫 : △ )</span>
-		                    <% else %>
-		                    <span>( 在庫 : ○ )</span>
-		                    <% end %>
-		                </div>
-		           	<% end %>
-		           </h4>
-		       </div>
+					<% @items.each do |item| %>
+					    <div class="item-box">
+						<% if admin_signed_in? %>
+						<%=link_to("編集する","/items/#{item.id}/edit")%><br>
+					    <% end %>
+						<!--画像画面左　登録がない場合noimageを表示-->
+					    <%= link_to item_path(item.id) do %>
+					    <%= attachment_image_tag item, :image, :fill, 150, 150, format: 'jpeg', fallback: "noimage_panda1.jpg",class:"item_image" %>
+					<% end %>
+						<!--商品内容-->
+						<div class="item-text">
+					    <h4><%= item.brand.brand_name %>
+						<h3><%= link_to "#{item.item_name}", item_path(item) %></h3>
+						<p class="tag"><%= item.category.name %></p> <p class="tag">サイズ：<%= item.size.size_name %> </p><br>
+						<%= number_to_currency(item.price) %>
+							<% if item.stock == 0 %>
+		                      <span><font color="red">売り切れ</font></span>
+			                        <% elsif item.stock >= 5 && item.stock < 20 %>
+			                        <span>( 在庫：△ )</span>
+				                    <% else %>
+				                    <span>( 在庫：○ )</span>
+				                    <% end %>
+					                </div>
+					            </h4>
+					        </div>
+					        <% end %>
+
+
 
 
     <div class="hide-box">
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <% if admin_signed_in? %>
-    <h1>　　　非表示アイテム一覧</h1>
+    <center><h1>非表示アイテム一覧</h1></center>
     		<% if params[:q].present? && params[:q][:artist_name_or_label_name_or_item_name_cont].present? %>
 		　　<div>
 		　　<p>検索語句：　<%= params[:q][:artist_name_or_label_name_or_item_name_cont] %></p>
@@ -120,4 +151,5 @@
 		                <% end %>
 		            <% end %>
 		        </div>
+
 

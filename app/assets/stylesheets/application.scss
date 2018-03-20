@@ -43,7 +43,7 @@ body,
 .container_all {
   width: 100%;
   margin: 0 auto;
-  padding:12px 20px;
+  padding:12px 0;
 }
 
 .applicaion-users-header {
@@ -54,14 +54,14 @@ body,
 }
 .gara{
   font-family: 'EB Garamond', serif;
-  font-brand: 24px;
+  font-size: 24px;
 }
 .applicaion-users-footer {
   background-color: #F08080;
   text-align: center;
   color: #fff;
   height: 40px;
-  font-brand: 10px;
+  font-size: 10px;
   line-height: 30px;
   width: 100%;
   margin-top: auto;
@@ -69,13 +69,13 @@ body,
 }
 .header-logo {
   float: left;
-  font-brand: 60px;
+  font-size: 60px;
   font-family: 'Nothing You Could Do', cursive;
   margin: 0 30px;
 }
 .header-logo2 {
   padding-top: 20px;
-  font-brand: 60px;
+  font-size: 60px;
   font-family: 'Nothing You Could Do', cursive;
   margin: 0 30px;
   float:left;
@@ -100,15 +100,12 @@ header ul{
 header li{
   display: inline;
   float: right;
-}
-
-.header-menu li{
   position: relative;
   display: inline-block;
   text-decoration: none;
   padding-top: 40px;
 }
-.header-menu li::after {
+header li::after {
   position: absolute;
   bottom: 2px;
   left: 0;
@@ -120,7 +117,7 @@ header li{
   visibility: hidden;
   transition: .3s;
 }
-.header-menu li:hover::after {
+header li:hover::after {
   bottom: -4px;
   opacity: 1;
   color: #000080;
@@ -142,17 +139,17 @@ header li{
   top: 12px;
 }
 .heading{
-  font-brand: 40px;
+  font-size: 40px;
   font-family: 'Nothing You Could Do', cursive;
 }
 
 .applicaion-admins-header {
-  background-color: gray;
+  background-color: lightgray;
   color: #fff;
   height: 170px;
 }
 .applicaion-admins-footer {
-  background-color: gray;
+  background-color: lightgray;
   text-align: center;
   color: #fff;
   height: 40px;
@@ -168,7 +165,7 @@ header li{
   }
 
 .applicaion-admins-header a:hover {
-    color: pink;
+    color: #000080;
     text-decoration: none;
   }
 
@@ -236,6 +233,31 @@ dl.searchbox dd{
  background-color: #fff;
  box-shadow: 5px 5px 5px #999;
  border-radius: 15px;/*角の丸み*/
+}
+.col-lg-2{
+  padding: 20px;
+  background-color: rgba(255,255,255,0.4);
+  border-left: 2px dotted rgba(0,0,0,0.1);
+  border-right: 2px dotted rgba(0,0,0,0.1);
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  margin-right: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.flash {
+    line-height: 40px;
+    text-align: center;
+    border-radius: 18px;
+    font-size: 14px;
+    color: #737373;
+}
+
+.flash_notice,.flash_n {
+    color: red;
+}
+
+.flash_alert {
+    background: #deacac66;
 }
 
 

@@ -1,4 +1,6 @@
 <div class="form_base_signin">
+  <br>
+  <br>
 
     <div class="form_signin">
       <h1 class="form_name">ログイン</h1>
@@ -7,7 +9,9 @@
         <div class="devise_errors">
           <%= devise_error_messages! %>
           <%if flash[:alert]%>
+          <br>
             <%= flash[:alert] %>
+          <br>
           <% end %>
         </div>
         <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: "メールアドレス" ,class: "form_style form_input" %><br>

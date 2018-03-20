@@ -28,8 +28,8 @@
           </td>
           <!--商品内容-->
           <td class="item_index_box_detail">
-          <p><h3><%= cart.item.item_name %></h3></p>
-
+          <p><h2><%= link_to "#{cart.item.item_name}", item_path(cart.item) %></h2></p>
+          <p class="tag"><%= cart.item.category.name %></p> <p class="tag">サイズ：<%= cart.item.size.size_name %></p>
           <p>カラー:<%= cart.item.color.color_name %></p>
           <p><%= number_to_currency(cart.item.price, :precision => 0) %>
             <% if cart.item.stock == 0 %>
@@ -63,19 +63,16 @@
 
       <% if @total_price <= 2000 %>
         <div class="total-price-box">
-        カート内合計金額：<%= @total_price+@fee %>円
-        <div class="border2">
         <p>送料：<%= @fee %>円</p>
-      </div>
-        <p><font color='red'>送料無料まであと<%= 2000-@total_price %>円！</font></p><br>
+        <div class="border2">
+          <p>カート内合計金額：<%= @total_price+@fee %>円
+          <p><font color='red'>送料無料まであと<%= 2000-@total_price %>円！</font></p><br>
       こちらの商品もいかがですか？
           <div class="item-image">
                 <%= attachment_image_tag @random, :image, format: 'jpeg', fallback: "noimage_panda1.jpg",class:"item_image2" %>
           </div>
       <%= link_to "#{@random.item_name}", item_path(@random) %><br>
       <%= @random.price %>円
-    </div>
-    </div>
 
 
         <% else %>

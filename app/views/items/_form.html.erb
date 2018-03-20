@@ -1,4 +1,8 @@
-<br><br><br><div class="row">
+<br>
+<br>
+<br>
+<div class="view">
+  <div class="row">
   <h2>商品登録</h2>
   <%= form_for(@item) do |f| %>
   <% if @item.errors.any? %>
@@ -58,4 +62,5 @@
     <h3><%= link_to"一覧に戻る", "/" %></h3>
     </div>
   </div>
+</div>
   <% end %>

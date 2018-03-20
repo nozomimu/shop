@@ -1,11 +1,15 @@
-<br>
-<br>
-<% if flash[:n] %>
-	<div class="flash-message"><%= flash[:n] %></div>
-<% end %>
 
 <section>
-	<div class="login-box">
+<div class="login-box">
+<br>
+<br>
+
+<% if flash[:n] %>
+    <br>
+	<div class="flash_n"><%= flash[:n] %></div>
+	<br>
+<% end %>
+
 	 <div class="gara"><h1>お問い合わせ</h1></div><br>
 		<% if @contact.errors.any? %>
 	    	<ul>

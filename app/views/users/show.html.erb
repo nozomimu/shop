@@ -1,14 +1,15 @@
   <div class="view">
-   <%if flash%>
+  <%if flash%>
+     <br>
    　<!-- ログイン時のメッセージ格納 -->
-      <% flash.each do |i,msg|%>
-       <div class="<%= "flash_#{i}"%> flash">
-         <%= msg %><br>
+      <% flash.each do |key,msg|%>
+       <div class="flash_<%= key%> flash">
+         <%= msg %>
        </div>
+         <br>
+         <br>
       <% end %>
    <% end %>
-   <br>
-   <br>
 
 <div class="user-box clearfix">
     <div class="heading">My page</div><br>
